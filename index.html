@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Selenium Practice App</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Selenium Practice App</h1>
+            <nav>
+                <a href="#" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="showSection('login')">Login</a>
+                <a href="#" onclick="showSection('register')">Register</a>
+                <a href="#" onclick="showSection('dynamic')">Dynamic</a>
+                <a href="#" onclick="showSection('tables')">Tables</a>
+                <a href="#" onclick="showSection('alerts')">Alerts</a>
+                <a href="#" onclick="showSection('uploads')">Upload</a>
+                <a href="#" onclick="showSection('dragdrop')">Drag & Drop</a>
+                <a href="#" onclick="showSection('api')">API</a>
+                <a href="#" onclick="showSection('random')">Random</a>
+                <button id="logoutBtn" onclick="logout()" style="display:none;">Logout</button>
+            </nav>
+        </header>
+
+        <main class="active">
+            <!-- Home Section -->
+            <section id="home" class="active">
+                <h2>Welcome to Selenium Practice App</h2>
+                <p>This application is designed for practicing Selenium WebDriver automation. It includes multiple pages and scenarios to help you master:</p>
+                <ul>
+                    <li><strong>Locators:</strong> XPath, CSS selectors, IDs, classes, and more</li>
+                    <li><strong>Waits:</strong> Implicit, explicit, and fluent waits with loading elements</li>
+                    <li><strong>Page Object Model (POM):</strong> Well-structured pages for easy mapping</li>
+                    <li><strong>Forms:</strong> Text inputs, dropdowns, checkboxes, radio buttons, and file uploads</li>
+                    <li><strong>Tables & Pagination:</strong> Dynamic data with sorting and pagination</li>
+                    <li><strong>Alerts & Popups:</strong> JavaScript alerts, iframes, and new window handling</li>
+                    <li><strong>Advanced Elements:</strong> Hidden elements, tooltips, drag & drop, and more</li>
+                    <li><strong>API Integration:</strong> Simulated API calls with dynamic content loading</li>
+                </ul>
+            </section>
+
+            <!-- Login Section -->
+            <section id="login">
+                <div class="login-container">
+                    <h2>Login</h2>
+                    <div id="loginAlert" class="alert"></div>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label><input type="checkbox" id="rememberMe" name="rememberMe"> Remember me</label>
+                        </div>
+                        <button type="submit" id="loginBtn">Login</button>
+                    </form>
+                    <p style="margin-top: 20px; font-size: 14px;"><strong>Demo credentials:</strong> admin / password123</p>
+                </div>
+            </section>
+
+            <!-- Register Section -->
+            <section id="register">
+                <div class="register-container">
+                    <h2>Register</h2>
+                    <div id="registerAlert" class="alert"></div>
+                    <form onsubmit="handleRegister(event)">
+                        <div class="form-group">
+                            <label for="fullName">Full Name:</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="regPassword">Password:</label>
+                                <input type="password" id="regPassword" name="regPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password:</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country:</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select Country</option>
+                                <option value="US">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="CA">Canada</option>
+                                <option value="AU">Australia</option>
+                                <option value="IN">India</option>
+                                <option value="DE">Germany</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender:</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="gender" value="Male"> Male</label>
+                                <label><input type="radio" name="gender" value="Female"> Female</label>
+                                <label><input type="radio" name="gender" value="Other"> Other</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profilePic">Profile Picture:</label>
+                            <input type="file" id="profilePic" name="profilePic" accept="image/*">
+                        </div>
+                        <button type="submit" id="registerBtn">Register</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Dynamic Elements Section -->
+            <section id="dynamic">
+                <h2>Dynamic Elements</h2>
+                <p>This page demonstrates elements that load dynamically. The button below will appear after 5 seconds.</p>
+                <div id="loadingSpinner" class="spinner"></div>
+                <div id="delayedButton" style="display: none; margin-top: 20px;">
+                    <button id="dynamicBtn">Click Me - I appeared after 5 seconds!</button>
+                </div>
+                <div id="delayedContent" style="display: none; margin-top: 20px; padding: 20px; background: #f0f0f0; border-radius: 5px;">
+                    ✓ Content loaded successfully!
+                </div>
+            </section>
+
+            <!-- Tables Section -->
+            <section id="tables">
+                <h2>Tables & Pagination</h2>
+                <div class="form-group" style="max-width: 300px;">
+                    <label for="searchInput">Search:</label>
+                    <input type="text" id="searchInput" placeholder="Search by name or email...">
+                </div>
+                <div class="table-container">
+                    <table id="dataTable">
+                        <thead>
+                            <tr>
+                                <th id="nameHeader">Name ↕</th>
+                                <th id="emailHeader">Email ↕</th>
+                                <th id="ageHeader">Age ↕</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="pagination"></div>
+            </section>
+
+            <!-- Alerts Section -->
+            <section id="alerts">
+                <h2>Alerts, Confirms & Prompts</h2>
+                
+                <h3>Simple Alert</h3>
+                <button id="alertBtn" onclick="showSimpleAlert()">Show Alert</button>
+
+                <h3>Confirm Dialog</h3>
+                <button id="confirmBtn" onclick="showConfirm()">Show Confirm</button>
+
+                <h3>Prompt Dialog</h3>
+                <button id="promptBtn" onclick="showPrompt()">Show Prompt</button>
+
+                <h3>IFrame Content</h3>
+                <div class="iframe-container">
+                    <iframe id="myFrame" srcdoc="<html><body style='font-family:Arial;padding:20px;'><label>Text inside iframe:</label><br><input type='text' id='iframeInput' placeholder='Type something' style='padding:8px;margin-top:10px;width:200px;border:1px solid #ddd;border-radius:4px;'></body></html>"></iframe>
+                </div>
+
+                <h3>New Window/Tab</h3>
+                <button id="newWindowBtn" onclick="openNewTab()">Open New Tab</button>
+            </section>
+
+            <!-- File Upload Section -->
+            <section id="uploads">
+                <h2>File Upload & Download</h2>
+                <div class="form-group">
+                    <label for="fileUpload">Choose File to Upload:</label>
+                    <input type="file" id="fileUpload" name="fileUpload">
+                </div>
+                <button id="uploadBtn" onclick="handleFileUpload()">Upload File</button>
+                <div id="uploadStatus" class="alert" style="margin-top: 20px;"></div>
+
+                <h3>Download Files</h3>
+                <div>
+                    <button id="downloadPdfBtn" onclick="downloadPDF()" class="download-btn">Download PDF</button>
+                    <button id="downloadTxtBtn" onclick="downloadTXT()" class="download-btn">Download Text</button>
+                </div>
+            </section>
+
+            <!-- Drag & Drop Section -->
+            <section id="dragdrop">
+                <h2>Drag & Drop</h2>
+                <p>Drag the blue box from Box A to Box B.</p>
+                <div class="drag-container">
+                    <div>
+                        <h3 style="text-align: center;">Box A (Source)</h3>
+                        <div class="drag-box" id="boxA">
+                            <div class="draggable" id="draggableItem" draggable="true">Drag me!</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="text-align: center;">Box B (Target)</h3>
+                        <div class="drag-box" id="boxB">Drop here</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Section -->
+            <section id="api">
+                <h2>API Data Fetching</h2>
+                <p>Click the button to fetch user data from a simulated API.</p>
+                <button id="fetchBtn" onclick="fetchUserData()">Fetch User Data</button>
+                <div id="loadingSpinner2" class="spinner" style="display: none;"></div>
+                <div id="apiResults" class="results" style="display: none;"></div>
+            </section>
+
+            <!-- Random Elements Section -->
+            <section id="random">
+                <h2>Random Elements (Advanced)</h2>
+                
+                <h3>Hidden Element</h3>
+                <button id="showHiddenBtn" onclick="toggleHidden()">Reveal Hidden Element</button>
+                <div id="hiddenElement" class="hidden-element">
+                    ✓ This element was hidden! Perfect for practicing waits and visibility checks.
+                </div>
+
+                <h3>Disabled Button</h3>
+                <button id="disabledBtn" disabled>This button is disabled</button>
+
+                <h3>Tooltip</h3>
+                <div class="tooltip-container">
+                    Hover over me
+                    <span class="tooltip-text">This is a helpful tooltip!</span>
+                </div>
+
+                <h3>Checkbox Group</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="options" value="Option1"> Option 1</label>
+                    <label><input type="checkbox" name="options" value="Option2"> Option 2</label>
+                    <label><input type="checkbox" name="options" value="Option3"> Option 3</label>
+                </div>
+
+                <h3>Multi-Select Dropdown</h3>
+                <select id="multiSelect" class="multi-select" multiple>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="csharp">C#</option>
+                    <option value="ruby">Ruby</option>
+                </select>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
