@@ -7,16 +7,17 @@
             sortColumn: null,
             sortOrder: 'asc',
             allData: [
-                { name: 'John Doe', email: 'john@example.com', age: 28 },
-                { name: 'Jane Smith', email: 'jane@example.com', age: 32 },
-                { name: 'Bob Johnson', email: 'bob@example.com', age: 25 },
-                { name: 'Alice Brown', email: 'alice@example.com', age: 29 },
-                { name: 'Charlie Davis', email: 'charlie@example.com', age: 31 },
-                { name: 'Eve Wilson', email: 'eve@example.com', age: 27 },
-                { name: 'Frank Miller', email: 'frank@example.com', age: 33 },
-                { name: 'Grace Lee', email: 'grace@example.com', age: 26 },
-                { name: 'Henry Taylor', email: 'henry@example.com', age: 30 },
-                { name: 'Ivy Anderson', email: 'ivy@example.com', age: 28 }
+                { name: 'Ntakadzeni Phidzaglima', email: 'ntaka@example.com', age: 23 },
+                { name: 'Ntanganedzeni Phidzaglima', email: 'ntanga@example.com', age: 21 },
+                { name: 'Elelwani Khavhagali', email: 'ele@example.com', age: 19 },
+                { name: 'Livhuwani Khavhagali', email: 'livhu@example.com', age: 17 },
+                { name: 'Thifhelimbilu Khavhagali', email: 'fheli@example.com', age: 15 },
+                { name: 'Khathutshelo Khavhagali', email: 'khathu@example.com', age: 13 },
+                { name: 'Wanga Phidzaglima', email: 'wanga@example.com', age: 11 },
+                { name: 'Rotondwa Phidzaglima', email: 'rotondwa@example.com', age: 9 },
+                { name: 'Romeo Phidzaglima', email: 'romeo@example.com', age: 7 },
+                { name: 'Zwoluga Phidzaglima', email: 'zwolu@example.com', age: 5 },
+                { name: 'Rialivhuwa Phidzaglima', email: 'ria@example.com', age: 3 }
             ],
             filteredData: []
         };
@@ -280,9 +281,9 @@ This file can be used to practice downloading files with Selenium.`;
             setTimeout(() => {
                 spinner.style.display = 'none';
                 const mockUsers = [
-                    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
-                    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
-                    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User' }
+                    { id: 1, name: 'Ntakadzeni Phidzaglima', email: 'ntaka@example.com', role: 'Admin' },
+                    { id: 2, name: 'Ntanganedzeni Phidzaglima', email: 'ntanga@example.com', role: 'User' },
+                    { id: 3, name: 'Elelwani Khavhagali', email: 'ele@example.com', role: 'User' }
                 ];
                 
                 resultsDiv.innerHTML = '<strong>API Response (Mock Data):</strong><br>' + 
