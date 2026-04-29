@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════
-   SELENIUMLAB – APP LOGIC
-   All original functionality preserved,
-   wired to the redesigned HTML.
-═══════════════════════════════════════ */
-
 const appState = {
   isLoggedIn: false,
   currentUser: null,
@@ -27,9 +21,8 @@ const appState = {
   filteredData: []
 };
 
-/* ──────────────────────────────────────
-   NAVIGATION
-────────────────────────────────────── */
+
+//NAVIGATION
 function showSection(sectionId) {
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(sectionId);
@@ -54,9 +47,8 @@ function scrollToScenarios() {
   document.getElementById('scenarios')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-/* ──────────────────────────────────────
-   MOBILE NAV
-────────────────────────────────────── */
+//MOBILE NAV
+
 function toggleMobileMenu() {
   const links = document.getElementById('navLinks');
   const btn   = document.getElementById('hamburger');
@@ -68,9 +60,8 @@ function closeMobileMenu() {
   document.getElementById('hamburger')?.classList.remove('open');
 }
 
-/* ──────────────────────────────────────
-   AUTH
-────────────────────────────────────── */
+//AUTH
+
 function handleLogin(event) {
   event.preventDefault();
   const username = document.getElementById('username').value.trim();
@@ -121,9 +112,9 @@ function logout() {
   showToast('Signed out successfully.');
 }
 
-/* ──────────────────────────────────────
-   INLINE ALERTS (inside forms/panels)
-────────────────────────────────────── */
+
+//INLINE ALERTS (inside forms/panels)
+
 function showInlineAlert(elementId, message, type) {
   const el = document.getElementById(elementId);
   if (!el) return;
@@ -137,9 +128,9 @@ function showInlineAlert(elementId, message, type) {
   }, 5000);
 }
 
-/* ──────────────────────────────────────
-   TOAST NOTIFICATIONS
-────────────────────────────────────── */
+
+//TOAST NOTIFICATIONS
+
 function showToast(message, type = '') {
   const container = document.getElementById('toastContainer');
   const toast = document.createElement('div');
@@ -155,9 +146,9 @@ function showToast(message, type = '') {
 // Keep backward compat alias
 function showNotification(message) { showToast(message); }
 
-/* ──────────────────────────────────────
-   JS DIALOGS
-────────────────────────────────────── */
+
+   //JS DIALOGS
+
 function showSimpleAlert()  { alert('This is a simple JavaScript alert!'); }
 
 function showConfirm() {
@@ -172,9 +163,8 @@ function showPrompt() {
 
 function openNewTab() { window.open('about:blank', '_blank'); }
 
-/* ──────────────────────────────────────
-   DYNAMIC ELEMENTS
-────────────────────────────────────── */
+//DYNAMIC ELEMENTS
+
 function setupDynamicElements() {
   const btn     = document.getElementById('delayedButton');
   const content = document.getElementById('delayedContent');
@@ -193,9 +183,8 @@ function setupDynamicElements() {
   }, 5000);
 }
 
-/* ──────────────────────────────────────
-   TABLE – RENDER
-────────────────────────────────────── */
+//TABLE – RENDER
+
 function renderTable() {
   const tbody = document.getElementById('tableBody');
   if (!tbody) return;
@@ -274,9 +263,8 @@ function sortTable(column) {
   renderPagination();
 }
 
-/* ──────────────────────────────────────
-   FILE UPLOAD
-────────────────────────────────────── */
+   //FILE UPLOAD
+
 function handleFileUpload() {
   const fileInput = document.getElementById('fileUpload');
   if (!fileInput || fileInput.files.length === 0) {
@@ -303,9 +291,9 @@ function updateUploadLabel(input) {
   }
 }
 
-/* ──────────────────────────────────────
-   DOWNLOADS
-────────────────────────────────────── */
+
+//DOWNLOADS
+
 function downloadPDF() {
   triggerDownload(
     'data:text/plain;charset=utf-8,' + encodeURIComponent('This is a sample PDF file generated for Selenium testing.'),
@@ -330,9 +318,9 @@ function triggerDownload(href, filename) {
   document.body.removeChild(a);
 }
 
-/* ──────────────────────────────────────
-   HIDDEN ELEMENT TOGGLE
-────────────────────────────────────── */
+
+   //HIDDEN ELEMENT TOGGLE
+
 function toggleHidden() {
   const hidden = document.getElementById('hiddenElement');
   const btn    = document.getElementById('showHiddenBtn');
@@ -347,9 +335,8 @@ function toggleHidden() {
   }
 }
 
-/* ──────────────────────────────────────
-   API FETCH (mock)
-────────────────────────────────────── */
+//API FETCH (mock)
+
 function fetchUserData() {
   const results = document.getElementById('apiResults');
   const spinner = document.getElementById('loadingSpinner2');
@@ -384,28 +371,25 @@ function fetchUserData() {
   }, 2000);
 }
 
-/* ──────────────────────────────────────
-   NAVBAR SCROLL SHADOW
-────────────────────────────────────── */
+
+//NAVBAR SCROLL SHADOW
+
 window.addEventListener('scroll', () => {
   const navbar = document.getElementById('navbar');
   if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 10);
 });
 
-/* ──────────────────────────────────────
-   DOM READY – EVENT LISTENERS
-────────────────────────────────────── */
+
+//DOM READY – EVENT LISTENERS
+
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* Table search */
   document.getElementById('searchInput')?.addEventListener('keyup', filterTable);
 
-  /* Table sort headers */
   document.getElementById('nameHeader')?.addEventListener('click',  () => sortTable('name'));
   document.getElementById('emailHeader')?.addEventListener('click', () => sortTable('email'));
   document.getElementById('ageHeader')?.addEventListener('click',   () => sortTable('age'));
 
-  /* ── Drag & Drop ── */
   const draggable = document.getElementById('draggableItem');
   const boxB      = document.getElementById('boxB');
 
@@ -447,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('Item dropped successfully!', 'success');
   });
 
-  /* ── Keyboard nav for home cards ── */
+  //Keyboard nav for home cards 
   document.querySelectorAll('.card[tabindex]').forEach(card => {
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
