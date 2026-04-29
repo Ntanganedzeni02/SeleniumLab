@@ -1,262 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Selenium Practice App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SeleniumLab – Practice Automation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Selenium Practice App</h1>
-            <nav>
-                <a href="#" onclick="showSection('home')">Home</a>
-                <a href="#" onclick="showSection('login')">Login</a>
-                <a href="#" onclick="showSection('register')">Register</a>
-                <a href="#" onclick="showSection('dynamic')">Dynamic</a>
-                <a href="#" onclick="showSection('tables')">Tables</a>
-                <a href="#" onclick="showSection('alerts')">Alerts</a>
-                <a href="#" onclick="showSection('uploads')">Upload</a>
-                <a href="#" onclick="showSection('dragdrop')">Drag & Drop</a>
-                <a href="#" onclick="showSection('api')">API</a>
-                <a href="#" onclick="showSection('random')">Random</a>
-                <button id="logoutBtn" onclick="logout()" style="display:none;">Logout</button>
-            </nav>
-        </header>
 
-        <main class="active">
-            <!-- Home Section -->
-            <section id="home" class="active">
-                <h2>Welcome to Selenium Practice App</h2>
-                <p>This application is designed for practicing Selenium WebDriver automation. It includes multiple pages and scenarios to help you master:</p>
-                <ul>
-                    <li><strong>Locators:</strong> XPath, CSS selectors, IDs, classes, and more</li>
-                    <li><strong>Waits:</strong> Implicit, explicit, and fluent waits with loading elements</li>
-                    <li><strong>Page Object Model (POM):</strong> Well-structured pages for easy mapping</li>
-                    <li><strong>Forms:</strong> Text inputs, dropdowns, checkboxes, radio buttons, and file uploads</li>
-                    <li><strong>Tables & Pagination:</strong> Dynamic data with sorting and pagination</li>
-                    <li><strong>Alerts & Popups:</strong> JavaScript alerts, iframes, and new window handling</li>
-                    <li><strong>Advanced Elements:</strong> Hidden elements, tooltips, drag & drop, and more</li>
-                    <li><strong>API Integration:</strong> Simulated API calls with dynamic content loading</li>
-                </ul>
-            </section>
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#" onclick="showSection('home')">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="8" fill="url(#lg)"/>
+          <path d="M8 14h4l2-5 2 10 2-5h2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#667eea"/><stop offset="1" stop-color="#764ba2"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>SeleniumLab</span>
+      </a>
 
-            <!-- Login Section -->
-            <section id="login">
-                <div class="login-container">
-                    <h2>Login</h2>
-                    <div id="loginAlert" class="alert"></div>
-                    <form onsubmit="handleLogin(event)">
-                        <div class="form-group">
-                            <label for="username">Username:</label>
-                            <input type="text" id="username" name="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label><input type="checkbox" id="rememberMe" name="rememberMe"> Remember me</label>
-                        </div>
-                        <button type="submit" id="loginBtn">Login</button>
-                    </form>
-                    <p style="margin-top: 20px; font-size: 14px;"><strong>Demo credentials:</strong> admin / password123</p>
-                </div>
-            </section>
+      <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
 
-            <!-- Register Section -->
-            <section id="register">
-                <div class="register-container">
-                    <h2>Register</h2>
-                    <div id="registerAlert" class="alert"></div>
-                    <form onsubmit="handleRegister(event)">
-                        <div class="form-group">
-                            <label for="fullName">Full Name:</label>
-                            <input type="text" id="fullName" name="fullName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="regPassword">Password:</label>
-                                <input type="password" id="regPassword" name="regPassword" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="confirmPassword">Confirm Password:</label>
-                                <input type="password" id="confirmPassword" name="confirmPassword" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Country:</label>
-                            <select id="country" name="country" required>
-                                <option value="">Select Country</option>
-                                <option value="US">South Africa</option>
-                                <option value="US">United States</option>
-                                <option value="UK">United Kingdom</option>
-                                <option value="CA">Canada</option>
-                                <option value="AU">Australia</option>
-                                <option value="IN">India</option>
-                                <option value="DE">Germany</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Gender:</label>
-                            <div class="radio-group">
-                                <label><input type="radio" name="gender" value="Male"> Male</label>
-                                <label><input type="radio" name="gender" value="Female"> Female</label>
-                                <label><input type="radio" name="gender" value="Other"> Other</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="profilePic">Profile Picture:</label>
-                            <input type="file" id="profilePic" name="profilePic" accept="image/*">
-                        </div>
-                        <button type="submit" id="registerBtn">Register</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- Dynamic Elements Section -->
-            <section id="dynamic">
-                <h2>Dynamic Elements</h2>
-                <p>This page demonstrates elements that load dynamically. The button below will appear after 5 seconds.</p>
-                <div id="loadingSpinner" class="spinner"></div>
-                <div id="delayedButton" style="display: none; margin-top: 20px;">
-                    <button id="dynamicBtn">Click Me - I appeared after 5 seconds!</button>
-                </div>
-                <div id="delayedContent" style="display: none; margin-top: 20px; padding: 20px; background: #f0f0f0; border-radius: 5px;">
-                    ✓ Content loaded successfully!
-                </div>
-            </section>
-
-            <!-- Tables Section -->
-            <section id="tables">
-                <h2>Tables & Pagination</h2>
-                <div class="form-group" style="max-width: 300px;">
-                    <label for="searchInput">Search:</label>
-                    <input type="text" id="searchInput" placeholder="Search by name or email...">
-                </div>
-                <div class="table-container">
-                    <table id="dataTable">
-                        <thead>
-                            <tr>
-                                <th id="nameHeader">Name ↕</th>
-                                <th id="emailHeader">Email ↕</th>
-                                <th id="ageHeader">Age ↕</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                </div>
-                <div class="pagination" id="pagination"></div>
-            </section>
-
-            <!-- Alerts Section -->
-            <section id="alerts">
-                <h2>Alerts, Confirms & Prompts</h2>
-                
-                <h3>Simple Alert</h3>
-                <button id="alertBtn" onclick="showSimpleAlert()">Show Alert</button>
-
-                <h3>Confirm Dialog</h3>
-                <button id="confirmBtn" onclick="showConfirm()">Show Confirm</button>
-
-                <h3>Prompt Dialog</h3>
-                <button id="promptBtn" onclick="showPrompt()">Show Prompt</button>
-
-                <h3>IFrame Content</h3>
-                <div class="iframe-container">
-                    <iframe id="myFrame" srcdoc="<html><body style='font-family:Arial;padding:20px;'><label>Text inside iframe:</label><br><input type='text' id='iframeInput' placeholder='Type something' style='padding:8px;margin-top:10px;width:200px;border:1px solid #ddd;border-radius:4px;'></body></html>"></iframe>
-                </div>
-
-                <h3>New Window/Tab</h3>
-                <button id="newWindowBtn" onclick="openNewTab()">Open New Tab</button>
-            </section>
-
-            <!-- File Upload Section -->
-            <section id="uploads">
-                <h2>File Upload & Download</h2>
-                <div class="form-group">
-                    <label for="fileUpload">Choose File to Upload:</label>
-                    <input type="file" id="fileUpload" name="fileUpload">
-                </div>
-                <button id="uploadBtn" onclick="handleFileUpload()">Upload File</button>
-                <div id="uploadStatus" class="alert" style="margin-top: 20px;"></div>
-
-                <h3>Download Files</h3>
-                <div>
-                    <button id="downloadPdfBtn" onclick="downloadPDF()" class="download-btn">Download PDF</button>
-                    <button id="downloadTxtBtn" onclick="downloadTXT()" class="download-btn">Download Text</button>
-                </div>
-            </section>
-
-            <!-- Drag & Drop Section -->
-            <section id="dragdrop">
-                <h2>Drag & Drop</h2>
-                <p>Drag the blue box from Box A to Box B.</p>
-                <div class="drag-container">
-                    <div>
-                        <h3 style="text-align: center;">Box A (Source)</h3>
-                        <div class="drag-box" id="boxA">
-                            <div class="draggable" id="draggableItem" draggable="true">Drag me!</div>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 style="text-align: center;">Box B (Target)</h3>
-                        <div class="drag-box" id="boxB">Drop here</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- API Section -->
-            <section id="api">
-                <h2>API Data Fetching</h2>
-                <p>Click the button to fetch user data from a simulated API.</p>
-                <button id="fetchBtn" onclick="fetchUserData()">Fetch User Data</button>
-                <div id="loadingSpinner2" class="spinner" style="display: none;"></div>
-                <div id="apiResults" class="results" style="display: none;"></div>
-            </section>
-
-            <!-- Random Elements Section -->
-            <section id="random">
-                <h2>Random Elements (Advanced)</h2>
-                
-                <h3>Hidden Element</h3>
-                <button id="showHiddenBtn" onclick="toggleHidden()">Reveal Hidden Element</button>
-                <div id="hiddenElement" class="hidden-element">
-                    ✓ This element was hidden! Perfect for practicing waits and visibility checks.
-                </div>
-
-                <h3>Disabled Button</h3>
-                <button id="disabledBtn" disabled>This button is disabled</button>
-
-                <h3>Tooltip</h3>
-                <div class="tooltip-container">
-                    Hover over me
-                    <span class="tooltip-text">This is a helpful tooltip!</span>
-                </div>
-
-                <h3>Checkbox Group</h3>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="options" value="Option1"> Option 1</label>
-                    <label><input type="checkbox" name="options" value="Option2"> Option 2</label>
-                    <label><input type="checkbox" name="options" value="Option3"> Option 3</label>
-                </div>
-
-                <h3>Multi-Select Dropdown</h3>
-                <select id="multiSelect" class="multi-select" multiple>
-                    <option value="python">Python</option>
-                    <option value="java">Java</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="csharp">C#</option>
-                    <option value="ruby">Ruby</option>
-                </select>
-            </section>
-        </main>
+      <div class="nav-links" id="navLinks">
+        <a href="#" class="nav-link" onclick="showSection('home'); closeMobileMenu()">Home</a>
+        <a href="#" class="nav-link" onclick="showSection('login'); closeMobileMenu()">Login</a>
+        <a href="#" class="nav-link" onclick="showSection('register'); closeMobileMenu()">Register</a>
+        <a href="#" class="nav-link" onclick="showSection('dynamic'); closeMobileMenu()">Dynamic</a>
+        <a href="#" class="nav-link" onclick="showSection('tables'); closeMobileMenu()">Tables</a>
+        <a href="#" class="nav-link" onclick="showSection('alerts'); closeMobileMenu()">Alerts</a>
+        <a href="#" class="nav-link" onclick="showSection('uploads'); closeMobileMenu()">Upload</a>
+        <a href="#" class="nav-link" onclick="showSection('dragdrop'); closeMobileMenu()">Drag & Drop</a>
+        <a href="#" class="nav-link" onclick="showSection('api'); closeMobileMenu()">API</a>
+        <a href="#" class="nav-link" onclick="showSection('random'); closeMobileMenu()">Advanced</a>
+        <button id="logoutBtn" class="btn-logout" onclick="logout()" style="display:none">Sign Out</button>
+      </div>
     </div>
-    <script src="script.js"></script>
+  </nav>
+
+  <!-- ═══════════ MAIN CONTENT ═══════════ -->
+  <main id="appMain">
+
+    <!-- ─── HOME ─── -->
+    <section id="home" class="active">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#667eea" opacity=".2"/><circle cx="7" cy="7" r="3" fill="#667eea"/></svg>
+          Open source practice environment
+        </div>
+        <h1 class="hero-title">Master Selenium<br><em>Without Guesswork</em></h1>
+        <p class="hero-sub">A comprehensive, real-world practice app for QA engineers. Every element carefully crafted to challenge every corner of WebDriver automation.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showSection('login')">Start Practicing</button>
+          <button class="btn-ghost" onclick="scrollToScenarios()">View Scenarios ↓</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">8+</span><span class="stat-label">Test Scenarios</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Interactive Elements</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Free to Use</span></div>
+        </div>
+      </div>
+
+      <!-- SCENARIOS GRID -->
+      <div class="scenarios" id="scenarios">
+        <div class="section-header">
+          <h2 class="section-title">Practice Scenarios</h2>
+          <p class="section-sub">Click any card to open that practice section</p>
+        </div>
+        <div class="cards-grid">
+
+          <div class="card" onclick="showSection('login')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3 class="card-title">Authentication</h3>
+            <p class="card-desc">Practice login forms, validation logic, session state, and error handling with real credentials.</p>
+            <span class="card-tag">Forms · Validation · Sessions</span>
+          </div>
+
+          <div class="card" onclick="showSection('register')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3 class="card-title">Registration Form</h3>
+            <p class="card-desc">Multi-field forms with dropdowns, radio buttons, file uploads, and complex validation rules.</p>
+            <span class="card-tag">Dropdowns · Radios · File Input</span>
+          </div>
+
+          <div class="card" onclick="showSection('dynamic')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
+            </div>
+            <h3 class="card-title">Dynamic Elements</h3>
+            <p class="card-desc">Delayed loads, spinners, and elements that appear after timeout — perfect for explicit waits.</p>
+            <span class="card-tag">Waits · Spinners · Async</span>
+          </div>
+
+          <div class="card" onclick="showSection('tables')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <h3 class="card-title">Tables & Pagination</h3>
+            <p class="card-desc">Sortable columns, live search filtering, and multi-page navigation for data table testing.</p>
+            <span class="card-tag">Sorting · Search · Pagination</span>
+          </div>
+
+          <div class="card" onclick="showSection('alerts')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4m0 4h.01"/></svg>
+            </div>
+            <h3 class="card-title">Alerts & iFrames</h3>
+            <p class="card-desc">JavaScript alerts, confirm/prompt dialogs, iframes, and new tab handling scenarios.</p>
+            <span class="card-tag">Alerts · iFrames · Windows</span>
+          </div>
+
+          <div class="card" onclick="showSection('uploads')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <h3 class="card-title">File Upload & Download</h3>
+            <p class="card-desc">Test file chooser dialogs, upload triggers, and automated file download scenarios.</p>
+            <span class="card-tag">File Input · Downloads</span>
+          </div>
+
+          <div class="card" onclick="showSection('dragdrop')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+            </div>
+            <h3 class="card-title">Drag & Drop</h3>
+            <p class="card-desc">HTML5 drag-and-drop interactions between source and target containers.</p>
+            <span class="card-tag">Actions · DnD</span>
+          </div>
+
+          <div class="card" onclick="showSection('api')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <h3 class="card-title">API & Async Loading</h3>
+            <p class="card-desc">Simulate API calls with loading states and dynamic content rendered from mock responses.</p>
+            <span class="card-tag">AJAX · Loading · JSON</span>
+          </div>
+
+          <div class="card card--wide" onclick="showSection('random')" tabindex="0">
+            <div class="card-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            </div>
+            <h3 class="card-title">Advanced Elements</h3>
+            <p class="card-desc">Hidden elements, disabled controls, tooltips, checkbox groups, and multi-select dropdowns — the trickiest elements to automate.</p>
+            <span class="card-tag">Hidden · Disabled · Tooltips · Multi-select</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+              <rect width="28" height="28" rx="8" fill="url(#lg2)"/>
+              <path d="M8 14h4l2-5 2 10 2-5h2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="lg2" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#667eea"/><stop offset="1" stop-color="#764ba2"/></linearGradient></defs>
+            </svg>
+            <span>SeleniumLab</span>
+          </div>
+          <p class="footer-copy">Built for QA engineers who take their craft seriously. Free to use, forever.</p>
+          <div class="footer-links">
+            <a href="#" onclick="showSection('home')">Home</a>
+            <a href="#" onclick="showSection('login')">Login</a>
+            <a href="#" onclick="showSection('tables')">Tables</a>
+            <a href="#" onclick="showSection('alerts')">Alerts</a>
+          </div>
+          <p class="footer-legal">© 2025 SeleniumLab · Open Source Practice Environment</p>
+        </div>
+      </footer>
+
+    </section>
+
+    <!-- ─── LOGIN ─── -->
+    <section id="login">
+      <div class="page-wrap page-wrap--sm">
+        <div class="page-hero">
+          <h2 class="page-title">Sign In</h2>
+          <p class="page-sub">Use demo credentials or test your own validation flow.</p>
+        </div>
+        <div class="card-panel">
+          <div id="loginAlert" class="inline-alert"></div>
+          <form onsubmit="handleLogin(event)" novalidate>
+            <div class="field">
+              <label class="field-label" for="username">Username</label>
+              <input class="field-input" type="text" id="username" name="username" placeholder="e.g. admin" required autocomplete="username"/>
+            </div>
+            <div class="field">
+              <label class="field-label" for="password">Password</label>
+              <input class="field-input" type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password"/>
+            </div>
+            <div class="field-row field-row--space">
+              <label class="checkbox-label"><input type="checkbox" id="rememberMe" name="rememberMe" class="checkbox-input"/> Remember me</label>
+              <a href="#" class="link-muted">Forgot password?</a>
+            </div>
+            <button type="submit" id="loginBtn" class="btn-primary btn-full">Sign In</button>
+          </form>
+          <div class="cred-hint">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+            Demo credentials: <strong>admin</strong> / <strong>password123</strong>
+          </div>
+        </div>
+        <p class="auth-switch">Don't have an account? <a href="#" onclick="showSection('register')">Register →</a></p>
+      </div>
+    </section>
+
+    <!-- ─── REGISTER ─── -->
+    <section id="register">
+      <div class="page-wrap page-wrap--md">
+        <div class="page-hero">
+          <h2 class="page-title">Create Account</h2>
+          <p class="page-sub">Fill every field — each is an automation opportunity.</p>
+        </div>
+        <div class="card-panel">
+          <div id="registerAlert" class="inline-alert"></div>
+          <form onsubmit="handleRegister(event)" novalidate>
+            <div class="field">
+              <label class="field-label" for="fullName">Full Name</label>
+              <input class="field-input" type="text" id="fullName" name="fullName" placeholder="Your full name" required/>
+            </div>
+            <div class="field">
+              <label class="field-label" for="email">Email Address</label>
+              <input class="field-input" type="email" id="email" name="email" placeholder="you@example.com" required/>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label" for="regPassword">Password</label>
+                <input class="field-input" type="password" id="regPassword" name="regPassword" placeholder="Min 8 characters" required/>
+              </div>
+              <div class="field">
+                <label class="field-label" for="confirmPassword">Confirm Password</label>
+                <input class="field-input" type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat password" required/>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="country">Country</label>
+              <select class="field-input field-select" id="country" name="country" required>
+                <option value="">Select your country</option>
+                <option value="ZA">South Africa</option>
+                <option value="US">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="CA">Canada</option>
+                <option value="AU">Australia</option>
+                <option value="IN">India</option>
+                <option value="DE">Germany</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Gender</label>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="gender" value="Male" class="radio-input"/> Male</label>
+                <label class="radio-label"><input type="radio" name="gender" value="Female" class="radio-input"/> Female</label>
+                <label class="radio-label"><input type="radio" name="gender" value="Other" class="radio-input"/> Other</label>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="profilePic">Profile Picture</label>
+              <div class="file-drop" id="fileDropZone" onclick="document.getElementById('profilePic').click()">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span id="fileDropLabel">Click to upload or drag & drop</span>
+                <span class="file-hint">PNG, JPG, GIF up to 10MB</span>
+                <input type="file" id="profilePic" name="profilePic" accept="image/*" style="display:none" onchange="updateFileLabel(this)"/>
+              </div>
+            </div>
+            <button type="submit" id="registerBtn" class="btn-primary btn-full">Create Account</button>
+          </form>
+        </div>
+        <p class="auth-switch">Already have an account? <a href="#" onclick="showSection('login')">Sign in →</a></p>
+      </div>
+    </section>
+
+    <!-- ─── DYNAMIC ─── -->
+    <section id="dynamic">
+      <div class="page-wrap">
+        <div class="page-hero">
+          <h2 class="page-title">Dynamic Elements</h2>
+          <p class="page-sub">Elements that load after a delay — built for practicing explicit waits.</p>
+        </div>
+        <div class="card-panel wait-panel">
+          <div class="wait-header">
+            <div class="wait-badge">5s delay</div>
+            <h3>Delayed Button Load</h3>
+            <p>The button below appears after 5 seconds. Use <code>WebDriverWait</code> with <code>ExpectedConditions.visibilityOfElementLocated</code>.</p>
+          </div>
+          <div id="waitState">
+            <div class="wait-loader" id="loadingSpinner">
+              <div class="spinner-ring"></div>
+              <span>Loading element<span class="dots"></span></span>
+            </div>
+            <div id="delayedButton" style="display:none">
+              <button id="dynamicBtn" class="btn-primary">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                I appeared after 5 seconds!
+              </button>
+            </div>
+            <div id="delayedContent" class="success-msg" style="display:none">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Content loaded successfully. Element is now interactable.
+            </div>
+          </div>
+          <div class="code-hint">
+            <span class="code-label">XPath hint</span>
+            <code>//button[@id='dynamicBtn']</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TABLES ─── -->
+    <section id="tables">
+      <div class="page-wrap page-wrap--lg">
+        <div class="page-hero">
+          <h2 class="page-title">Tables & Pagination</h2>
+          <p class="page-sub">Sort columns, search records, and navigate pages.</p>
+        </div>
+        <div class="card-panel">
+          <div class="table-toolbar">
+            <div class="search-wrap">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" id="searchInput" class="search-input" placeholder="Search by name or email…"/>
+            </div>
+            <span class="table-count" id="tableCount"></span>
+          </div>
+          <div class="table-wrap">
+            <table id="dataTable" class="data-table">
+              <thead>
+                <tr>
+                  <th id="nameHeader" class="sortable">Name <span class="sort-icon">↕</span></th>
+                  <th id="emailHeader" class="sortable">Email <span class="sort-icon">↕</span></th>
+                  <th id="ageHeader" class="sortable">Age <span class="sort-icon">↕</span></th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ALERTS ─── -->
+    <section id="alerts">
+      <div class="page-wrap">
+        <div class="page-hero">
+          <h2 class="page-title">Alerts, Dialogs & iFrames</h2>
+          <p class="page-sub">Handle every type of browser popup and nested context.</p>
+        </div>
+        <div class="cards-grid cards-grid--3">
+
+          <div class="card-panel scenario-card">
+            <div class="scenario-icon scenario-icon--warn">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4m0 4h.01"/></svg>
+            </div>
+            <h3>Simple Alert</h3>
+            <p>Fires a basic JS <code>alert()</code>. Switch to the alert context with <code>driver.switchTo().alert()</code>.</p>
+            <button id="alertBtn" class="btn-primary" onclick="showSimpleAlert()">Trigger Alert</button>
+          </div>
+
+          <div class="card-panel scenario-card">
+            <div class="scenario-icon scenario-icon--blue">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+            </div>
+            <h3>Confirm Dialog</h3>
+            <p>A <code>confirm()</code> with OK/Cancel. Test both paths — <code>.accept()</code> and <code>.dismiss()</code>.</p>
+            <button id="confirmBtn" class="btn-primary" onclick="showConfirm()">Trigger Confirm</button>
+          </div>
+
+          <div class="card-panel scenario-card">
+            <div class="scenario-icon scenario-icon--purple">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Prompt Dialog</h3>
+            <p>A <code>prompt()</code> that accepts user text. Use <code>.sendKeys()</code> after switching to alert.</p>
+            <button id="promptBtn" class="btn-primary" onclick="showPrompt()">Trigger Prompt</button>
+          </div>
+
+        </div>
+
+        <div class="card-panel" style="margin-top: 24px;">
+          <h3 class="panel-subtitle">iFrame Content</h3>
+          <p class="panel-desc">Switch context using <code>driver.switchTo().frame("myFrame")</code> to interact with the input inside.</p>
+          <div class="iframe-wrap">
+            <iframe id="myFrame" srcdoc="<html><body style='font-family:system-ui;padding:24px;background:#fafafa;'><label style='font-size:13px;color:#555;font-weight:600;display:block;margin-bottom:8px;'>Input inside the iFrame:</label><input type='text' id='iframeInput' placeholder='Interact with me via switchTo().frame()' style='width:100%;max-width:380px;padding:10px 14px;border:1px solid #ddd;border-radius:6px;font-size:14px;outline:none;'/></body></html>"></iframe>
+          </div>
+        </div>
+
+        <div class="card-panel" style="margin-top: 24px;">
+          <h3 class="panel-subtitle">New Window / Tab</h3>
+          <p class="panel-desc">Opens a blank tab. Use <code>driver.getWindowHandles()</code> to switch between windows.</p>
+          <button id="newWindowBtn" class="btn-secondary" onclick="openNewTab()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open New Tab
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── UPLOADS ─── -->
+    <section id="uploads">
+      <div class="page-wrap">
+        <div class="page-hero">
+          <h2 class="page-title">File Upload & Download</h2>
+          <p class="page-sub">Practice file chooser interactions and download assertions.</p>
+        </div>
+        <div class="cards-grid cards-grid--2">
+
+          <div class="card-panel">
+            <h3 class="panel-subtitle">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload a File
+            </h3>
+            <p class="panel-desc">Use <code>element.sendKeys("/path/to/file")</code> to upload without a dialog.</p>
+            <div class="file-drop" id="uploadDropZone" onclick="document.getElementById('fileUpload').click()">
+              <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span id="uploadLabel">Click to choose file</span>
+              <span class="file-hint">Any file type accepted</span>
+              <input type="file" id="fileUpload" name="fileUpload" style="display:none" onchange="updateUploadLabel(this)"/>
+            </div>
+            <button id="uploadBtn" class="btn-primary" onclick="handleFileUpload()" style="margin-top:16px">Upload File</button>
+            <div id="uploadStatus" class="inline-alert" style="margin-top:16px"></div>
+          </div>
+
+          <div class="card-panel">
+            <h3 class="panel-subtitle">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Files
+            </h3>
+            <p class="panel-desc">Trigger downloads and assert files appear in your download directory.</p>
+            <div class="download-list">
+              <div class="download-item">
+                <div class="download-meta">
+                  <span class="download-name">sample.txt</span>
+                  <span class="download-size">~1 KB · Text</span>
+                </div>
+                <button id="downloadPdfBtn" class="btn-download" onclick="downloadPDF()">Download</button>
+              </div>
+              <div class="download-item">
+                <div class="download-meta">
+                  <span class="download-name">selenium-sample.txt</span>
+                  <span class="download-size">~1 KB · Text</span>
+                </div>
+                <button id="downloadTxtBtn" class="btn-download" onclick="downloadTXT()">Download</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── DRAG & DROP ─── -->
+    <section id="dragdrop">
+      <div class="page-wrap">
+        <div class="page-hero">
+          <h2 class="page-title">Drag & Drop</h2>
+          <p class="page-sub">Move the item from Source to Target using <code>Actions.dragAndDrop()</code>.</p>
+        </div>
+        <div class="card-panel">
+          <div class="dnd-arena">
+            <div class="dnd-zone">
+              <div class="dnd-zone-label">
+                <span class="dnd-zone-badge">A</span>
+                Source
+              </div>
+              <div class="drag-box" id="boxA">
+                <div class="draggable" id="draggableItem" draggable="true">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/></svg>
+                  Drag me!
+                </div>
+              </div>
+            </div>
+            <div class="dnd-arrow">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </div>
+            <div class="dnd-zone">
+              <div class="dnd-zone-label">
+                <span class="dnd-zone-badge dnd-zone-badge--target">B</span>
+                Target
+              </div>
+              <div class="drag-box drag-box--target" id="boxB">
+                <span class="drop-hint">Drop here</span>
+              </div>
+            </div>
+          </div>
+          <div class="code-hint">
+            <span class="code-label">Actions hint</span>
+            <code>new Actions(driver).dragAndDrop(source, target).build().perform()</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── API ─── -->
+    <section id="api">
+      <div class="page-wrap">
+        <div class="page-hero">
+          <h2 class="page-title">API Data Fetching</h2>
+          <p class="page-sub">Simulate async API calls with loading states and dynamic content.</p>
+        </div>
+        <div class="card-panel">
+          <div class="api-trigger">
+            <div>
+              <h3>Fetch User Data</h3>
+              <p>Click to simulate a 2-second API call. The spinner appears while loading, then results render.</p>
+            </div>
+            <button id="fetchBtn" class="btn-primary" onclick="fetchUserData()">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.55"/></svg>
+              Fetch Data
+            </button>
+          </div>
+          <div id="loadingSpinner2" class="inline-loader" style="display:none">
+            <div class="spinner-ring spinner-ring--sm"></div>
+            <span>Fetching from API…</span>
+          </div>
+          <div id="apiResults" class="api-results" style="display:none"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── RANDOM / ADVANCED ─── -->
+    <section id="random">
+      <div class="page-wrap">
+        <div class="page-hero">
+          <h2 class="page-title">Advanced Elements</h2>
+          <p class="page-sub">The trickiest elements to locate and interact with.</p>
+        </div>
+        <div class="cards-grid cards-grid--2">
+
+          <div class="card-panel scenario-card">
+            <h3 class="panel-subtitle">Hidden Element</h3>
+            <p class="panel-desc">Element starts hidden. Use <code>ExpectedConditions.visibilityOf()</code> after triggering reveal.</p>
+            <button id="showHiddenBtn" class="btn-secondary" onclick="toggleHidden()">Reveal Hidden Element</button>
+            <div id="hiddenElement" class="reveal-msg">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              This element was hidden! Now it's visible and interactable.
+            </div>
+          </div>
+
+          <div class="card-panel scenario-card">
+            <h3 class="panel-subtitle">Disabled Button</h3>
+            <p class="panel-desc">Assert the button is disabled with <code>getAttribute("disabled")</code>. It cannot be clicked.</p>
+            <button id="disabledBtn" class="btn-primary" disabled>Cannot Click Me</button>
+            <p class="code-block"><code>elem.isEnabled() // → false</code></p>
+          </div>
+
+          <div class="card-panel scenario-card">
+            <h3 class="panel-subtitle">Tooltip</h3>
+            <p class="panel-desc">Hover to reveal a tooltip. Use <code>Actions.moveToElement()</code> to trigger hover state.</p>
+            <div class="tooltip-host">
+              <span class="tooltip-trigger">
+                Hover over me
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+              </span>
+              <div class="tooltip-popup">This is a helpful tooltip!</div>
+            </div>
+          </div>
+
+          <div class="card-panel scenario-card">
+            <h3 class="panel-subtitle">Checkbox Group</h3>
+            <p class="panel-desc">Select individual or all checkboxes. Assert state with <code>isSelected()</code>.</p>
+            <div class="checkbox-group">
+              <label class="checkbox-label"><input type="checkbox" name="options" value="Option1" class="checkbox-input"/> Option 1</label>
+              <label class="checkbox-label"><input type="checkbox" name="options" value="Option2" class="checkbox-input"/> Option 2</label>
+              <label class="checkbox-label"><input type="checkbox" name="options" value="Option3" class="checkbox-input"/> Option 3</label>
+            </div>
+          </div>
+
+          <div class="card-panel scenario-card card-panel--wide">
+            <h3 class="panel-subtitle">Multi-Select Dropdown</h3>
+            <p class="panel-desc">Hold <kbd>Ctrl</kbd> / <kbd>Cmd</kbd> to select multiple values. Use <code>Select.selectByVisibleText()</code> in a loop.</p>
+            <select id="multiSelect" class="field-input multi-select-field" multiple>
+              <option value="python">Python</option>
+              <option value="java">Java</option>
+              <option value="javascript">JavaScript</option>
+              <option value="csharp">C#</option>
+              <option value="ruby">Ruby</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ TOAST CONTAINER ═══════════ -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
